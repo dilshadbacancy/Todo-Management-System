@@ -11,6 +11,7 @@ export interface IUser extends Document {
     age?: number;
     createdAt: Date;
     updatedAt: Date;
+    userType: 'Admin' | 'Employee'
     comparePassword(password: string): Promise<boolean>;
     generateAccessToken(): string;
 }
@@ -53,6 +54,11 @@ const userSchema = new Schema<IUser>(
             min: [1, 'Age must be at least 1'],
             max: [120, 'Age cannot exceed 120']
         },
+        userType: {
+            type: String,
+            enum: ["Admin", "Emoployee"],
+            required: true
+        }
     },
     {
         timestamps: true,

@@ -9,11 +9,11 @@ export class UserController {
     async getAllUsers(req: Request, res: Response): Promise<void> {
         try {
             const user = await User.find().select("-password");
-            if(!user){
+            if (!user) {
                 res.status(200).json({
-                    success:true,
-                    message:"Users fetched successfully",
-                    data:[]
+                    success: true,
+                    message: "Users fetched successfully",
+                    data: []
                 })
                 return;
             }
@@ -66,7 +66,7 @@ export class UserController {
 
     async createUser(req: Request, res: Response): Promise<void> {
         try {
-            const { name, email, password, age } = req.body;
+            const { name, email, password, age, userType } = req.body;
 
             const isUserExist = await User.findOne({ email });
 
@@ -78,7 +78,7 @@ export class UserController {
                 return;
             }
 
-            const user = await User.create({ name, email, password, age });
+            const user = await User.create({ name, email, password, age, userType });
 
             const token = user.generateAccessToken();
             const { password: _password, ...safeUser } = user.toObject();
@@ -234,16 +234,16 @@ export class UserController {
 
 
     async deleteAllUser(req: Request, res: Response): Promise<void> {
-        try{
+        try {
             const user = await User.deleteMany({})
-        res.status(200).json({
-            success: true,
-            message: `${user} has been deleted`,
-        })
-        }catch(e:any){
+            res.status(200).json({
+                success: true,
+                message: `${user} has been deleted`,
+            })
+        } catch (e: any) {
             res.status(400).json({
-                success:false,
-                message:e.message
+                success: false,
+                message: e.message
             })
         }
     }
