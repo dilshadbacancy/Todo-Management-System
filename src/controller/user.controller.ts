@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { User } from "../model/user.model";
-import jwt from 'jsonwebtoken';
-import { config } from "../config/config";
+import { AuthRequest } from "../middleware/auth.middleware";
 
 
 export class UserController {
@@ -31,6 +30,8 @@ export class UserController {
             return;
         }
     }
+
+
 
     async getUserById(req: Request, res: Response): Promise<void> {
         try {
@@ -247,6 +248,93 @@ export class UserController {
             })
         }
     }
+
+
+
+    async changePassword(req: AuthRequest, res: Response): Promise<void> {
+        const { currentPassword, newPassword, confirmPassword } = req.body;
+        const userId = req.user._id;
+
+        if (!currentPassword) {
+            res.status(200).json({
+                success: false,
+                message: "Current password is required"
+            })
+            return;
+        }
+        if (!newPassword) {
+            res.status(200).json({
+                success: false,
+                message: "New password is reequired"
+            })
+            return;
+        }
+
+        if (!confirmPassword) {
+            res.status(200).json({
+                success: false,
+                message: "Confirm password is required"
+            })
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            res.status(200).json({
+                success: false,
+                message: "Passowrd doesnot match"
+            })
+            return;
+        }
+
+        if (currentPassword === newPassword) {
+            res.status(200).json({
+                success: false,
+                message: "New password must be different from current password "
+            })
+
+            return;
+        }
+
+        if (newPassword.length < 6) {
+            res.status(200).json({
+                success: false,
+                message: "Passowrd must be of 6 charachter long"
+            })
+            return;
+        }
+
+        const user = await User.findById(userId).select('+password');
+
+        if (!user) {
+            res.status(200).json({
+                success: false,
+                message: "User does not found in our records"
+            })
+            return;
+        }
+
+        const isValidPassword = await user.comparePassword(currentPassword)
+
+        if (!isValidPassword) {
+            res.status(200).json({
+                success: false,
+                message: "Current password is not valid."
+            })
+            return;
+        }
+
+        user.password = newPassword;
+        user.save();
+        res.status(200).json({
+            success: true,
+            message: "Password reset successfully"
+        })
+
+
+    }
+
 }
+
+
 
 export const userController = new UserController()
