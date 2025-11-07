@@ -1,0 +1,72 @@
+
+====================================================================================================
+TIMESTAMP             | REQUEST ID                           | METHOD | STATUS | TIME  | URL
+----------------------------------------------------------------------------------------------------
+2025-11-07 10:41:28   | 1d6e46d0-be92-452c-aeb6-6027ac355cfa | POST   | 200    | 106ms | /api/users/login
+Body:                                                        || Response:
+{                                                            || {
+  "email": "vora@example.com",                               ||   "success": true,
+  "password": "***HIDDEN***"                                 ||   "message": "Login Successfull",
+}                                                            ||   "data": {
+                                                             ||     "user": {
+                                                             ||       "_id": "690c9d20b6885487f94046c1",
+                                                             ||       "name": "Kevan Vora",
+                                                             ||       "email": "vora@example.com",
+                                                             ||       "age": 27,
+                                                             ||       "userType": "Admin",
+                                                             ||       "createdAt": "2025-11-06T13:05:36.636Z",
+                                                             ||       "updatedAt": "2025-11-07T09:58:54.620Z",
+                                                             ||       "__v": 0
+                                                             ||     },
+                                                             ||     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGM5ZDIwYjY4ODU0ODdmOTQwNDZjMSIsImVtYWlsIjoidm9yYUBleGFtcGxlLmNvbSIsImlhdCI6MTc2MjUxMjA4OCwiZXhwIjoxNzYyNTk4NDg4fQ.yMLpl8sfTqF-RtwL9ea30l64vPnZ396deK9JMU0vfWk"
+                                                             ||   }
+                                                             || }
+====================================================================================================
+
+====================================================================================================
+TIMESTAMP             | REQUEST ID                           | METHOD | STATUS | TIME  | URL
+----------------------------------------------------------------------------------------------------
+2025-11-07 10:41:41   | a9a476e2-9012-4a6e-ab43-26008f8b8624 | POST   | 200    | 96ms  | /api/users/login
+Body:                                                        || Response:
+{                                                            || {
+  "email": "vora@example.com",                               ||   "success": true,
+  "password": "***HIDDEN***"                                 ||   "message": "Login Successfull",
+}                                                            ||   "data": {
+                                                             ||     "user": {
+                                                             ||       "_id": "690c9d20b6885487f94046c1",
+                                                             ||       "name": "Kevan Vora",
+                                                             ||       "email": "vora@example.com",
+                                                             ||       "age": 27,
+                                                             ||       "userType": "Admin",
+                                                             ||       "createdAt": "2025-11-06T13:05:36.636Z",
+                                                             ||       "updatedAt": "2025-11-07T09:58:54.620Z",
+                                                             ||       "__v": 0
+                                                             ||     },
+                                                             ||     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGM5ZDIwYjY4ODU0ODdmOTQwNDZjMSIsImVtYWlsIjoidm9yYUBleGFtcGxlLmNvbSIsImlhdCI6MTc2MjUxMjEwMSwiZXhwIjoxNzYyNTk4NTAxfQ.yuXniOFUyVhiLmlfX1dMfPQ8slwcn32Gis7O2aqJRU8"
+                                                             ||   }
+                                                             || }
+====================================================================================================
+
+====================================================================================================
+TIMESTAMP             | REQUEST ID                           | METHOD | STATUS | TIME  | URL
+----------------------------------------------------------------------------------------------------
+2025-11-07 10:42:08   | 856ad9e3-403d-492c-a5f1-a628e22fd553 | POST   | 200    | 89ms  | /api/users/login
+Body:                                                        || Response:
+{                                                            || {
+  "email": "vora@example.com",                               ||   "success": true,
+  "password": "***HIDDEN***"                                 ||   "message": "Login Successfull",
+}                                                            ||   "data": {
+                                                             ||     "user": {
+                                                             ||       "_id": "690c9d20b6885487f94046c1",
+                                                             ||       "name": "Kevan Vora",
+                                                             ||       "email": "vora@example.com",
+                                                             ||       "age": 27,
+                                                             ||       "userType": "Admin",
+                                                             ||       "createdAt": "2025-11-06T13:05:36.636Z",
+                                                             ||       "updatedAt": "2025-11-07T09:58:54.620Z",
+                                                             ||       "__v": 0
+                                                             ||     },
+                                                             ||     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGM5ZDIwYjY4ODU0ODdmOTQwNDZjMSIsImVtYWlsIjoidm9yYUBleGFtcGxlLmNvbSIsImlhdCI6MTc2MjUxMjEyOCwiZXhwIjoxNzYyNTk4NTI4fQ.R3zlBgysyz-kmlQsHhkEuGrJDWj4YLvV4dFujAvv_8A"
+                                                             ||   }
+                                                             || }
+====================================================================================================
