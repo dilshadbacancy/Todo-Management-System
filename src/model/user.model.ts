@@ -11,7 +11,8 @@ export interface IUser extends Document {
     age?: number;
     createdAt: Date;
     updatedAt: Date;
-    userType: 'Admin' | 'Employee'
+    userType: 'Admin' | 'Employee',
+    fcmToken?: string,
     comparePassword(password: string): Promise<boolean>;
     generateAccessToken(): string;
 }
@@ -58,6 +59,10 @@ const userSchema = new Schema<IUser>(
             type: String,
             enum: ["Admin", "Emoployee"],
             required: true
+        },
+        fcmToken: {
+            type: String,
+            required: false
         }
     },
     {

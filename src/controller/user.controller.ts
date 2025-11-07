@@ -333,6 +333,77 @@ export class UserController {
 
     }
 
+    async saveFcm(req: AuthRequest, res: Response): Promise<void> {
+        try {
+            const { fcmToken } = req.body;
+            const userId = req.user._id;
+            if (!fcmToken) {
+                res.status(200).json({
+                    succss: false,
+                    message: "FCM token is required"
+                })
+                return;
+            }
+
+            const user = await User.findById(userId).select('-password');
+            if (!user) {
+                res.status(200).json({
+                    success: false,
+                    message: "User does not found in our records"
+                })
+                return;
+            }
+
+            user.fcmToken = fcmToken;
+            user.save();
+            res.status(200).json({
+                success: true,
+                message: "FCM token saved successfully",
+                data: user
+            })
+
+
+        } catch (e: any) {
+            res.status(201).json({
+                success: false,
+                message: e.message,
+            })
+        }
+
+    }
+
+    async logout(req: AuthRequest, res: Response): Promise<void> {
+        try {
+            const userId = req.user.id;
+
+            const user = await User.findById(userId).select('-password');
+
+            if (!user) {
+                res.status(200).json({
+                    success: false,
+                    message: "User doesnot found in our records"
+                })
+                return;
+            }
+
+            user.fcmToken = undefined;
+            user.save();
+            res.status(200).json({
+                success: true,
+                message: "User logged out successfully.",
+                data: user
+            })
+
+
+        } catch (e: any) {
+            res.status(201).json({
+                success: false,
+                message: e.message
+            })
+        }
+
+    }
+
 }
 
 
