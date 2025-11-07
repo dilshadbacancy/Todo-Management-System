@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { User } from "../model/user.model";
 import { AuthRequest } from "../middleware/auth.middleware";
+import admin from "../config/firebase";
 
 
 export class UserController {
@@ -403,6 +404,32 @@ export class UserController {
         }
 
     }
+
+
+    async sendReminder(userId: String, title: String): Promise<void> {
+        try {
+            const user = await User.findById(userId);
+
+            if (!user?.fcmToken) {
+                console.log("No Fcm token for the user");
+                return;
+            }
+
+            const message = {
+                notification: {
+                    title: "Task Overdue",
+                    body: `Your task ${title} is overdue, please complete it`,
+
+                },
+                token: user.fcmToken,
+            }
+            await admin.messaging().send(message);
+        } catch (e: any) {
+            console.log(`Error sending the message::: ${e.message}`);
+
+        }
+    }
+
 
 }
 

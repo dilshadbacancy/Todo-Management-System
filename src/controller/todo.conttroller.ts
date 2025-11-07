@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
-import { Todo } from "../model/todo.model";
+import { Todo, TodoModel } from "../model/todo.model";
 import { AuthRequest } from '../middleware/auth.middleware';
+import { logger } from "../middleware/logger";
+import { User } from "../model/user.model";
+import { messaging } from "firebase-admin";
 
 
 export class TodoController {
@@ -487,6 +490,59 @@ export class TodoController {
             res.status(200).json({
                 success: false,
                 message: e.message,
+            })
+        }
+    }
+
+
+    async getOverDueTask(): Promise<TodoModel[]> {
+        try {
+            const now = new Date();
+            const filter = {
+                dueDate: { $lte: now },
+                completed: false,
+            };
+
+            const todos = await Todo.find(filter);
+
+            return todos;
+
+        } catch (e: any) {
+            console.log(`Error::: ${e.message}`);
+            throw new Error(e.message);
+        }
+    }
+
+
+    async getOverdueTodos(req: AuthRequest, res: Response): Promise<void> {
+        try {
+
+            const userId = req.user._id;
+            const now = new Date();
+            const filter = {
+                user: userId,
+                dueDate: { $lte: now },
+                completed: false,
+            };
+            const overDueTodos = await Todo.find(filter);
+            if (!overDueTodos) {
+                res.status(200).json({
+                    success: false,
+                    message: "No Overdue todo for you!!"
+                })
+                return;
+            }
+
+            res.status(200).json({
+                success: true,
+                message: "Overdue todo fetched",
+                data: overDueTodos,
+            })
+
+        } catch (e: any) {
+            res.status(201).json({
+                success: false,
+                message: e.message
             })
         }
     }
