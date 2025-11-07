@@ -1,12 +1,15 @@
 import app from './app';
 import { config } from './config/config'
 import { connectDatabase } from './config/database'
+import { startDueReminderJob } from './jobs/dueReminder.job';
 
 
 const startServer = async () => {
     try {
 
-        await connectDatabase();
+        await connectDatabase().then(() => {
+            startDueReminderJob();
+        });
         const PORT = config.server.port;
 
         app.listen(PORT, () => {
