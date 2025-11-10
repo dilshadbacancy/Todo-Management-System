@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import { env } from "process";
+import { FirebaseConfig } from "./firebase_config";
 
 dotenv.config();
 
@@ -14,10 +15,13 @@ interface Config {
     keys: {
         secret_keys: {
             jwt_key: string | undefined,
-            jwt_expires_in_day:string | undefined
-        }
+            jwt_expires_in_day: string | undefined,
+        },
+        firebase: FirebaseConfig | undefined
     }
 }
+
+
 
 function validateConfig(): Config {
 
@@ -33,6 +37,7 @@ function validateConfig(): Config {
         throw new Error("NODE_ENV is not set");
     }
 
+
     return {
         server: {
             port: process.env.PORT,
@@ -41,11 +46,14 @@ function validateConfig(): Config {
         database: {
             url: process.env.MONGODB_URI,
         },
-        keys:{
-            secret_keys:{
-                jwt_key:process.env.JWT_SECRET,
-                jwt_expires_in_day:process.env.JWT_EXPIRES_IN,
-            }
+        keys: {
+            secret_keys: {
+                jwt_key: process.env.JWT_SECRET,
+                jwt_expires_in_day: process.env.JWT_EXPIRES_IN,
+            },
+            firebase: process.env.FIREBASE_ADMIN
+                ? JSON.parse(process.env.FIREBASE_ADMIN)
+                : undefined
         }
     };
 }

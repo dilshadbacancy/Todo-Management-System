@@ -1,0 +1,25 @@
+
+====================================================================================================
+TIMESTAMP             | REQUEST ID                           | METHOD | STATUS | TIME  | URL
+----------------------------------------------------------------------------------------------------
+2025-11-10 04:43:10   | 4a44a0ef-573f-439f-9e3f-40f903d53299 | POST   | 200    | 128ms | /api/users/login
+Body:                                                        || Response:
+{                                                            || {
+  "email": "vora@example.com",                               ||   "success": true,
+  "password": "***HIDDEN***"                                 ||   "message": "Login Successfull",
+}                                                            ||   "data": {
+                                                             ||     "user": {
+                                                             ||       "_id": "690c9d20b6885487f94046c1",
+                                                             ||       "name": "Kevan Vora",
+                                                             ||       "email": "vora@example.com",
+                                                             ||       "age": 27,
+                                                             ||       "userType": "Admin",
+                                                             ||       "createdAt": "2025-11-06T13:05:36.636Z",
+                                                             ||       "updatedAt": "2025-11-07T12:44:45.336Z",
+                                                             ||       "__v": 0,
+                                                             ||       "fcmToken": "asfasfsadf"
+                                                             ||     },
+                                                             ||     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGM5ZDIwYjY4ODU0ODdmOTQwNDZjMSIsImVtYWlsIjoidm9yYUBleGFtcGxlLmNvbSIsImlhdCI6MTc2Mjc0OTc5MCwiZXhwIjoxNzYyODM2MTkwfQ.AeCvSIoW7776YVprjs6XcQhMftL_23_t-jHiubzdC9A"
+                                                             ||   }
+                                                             || }
+====================================================================================================
